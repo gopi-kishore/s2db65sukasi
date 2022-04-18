@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p This is my second project on heroku and pug.
+  button(type="button", class="btn btn-primary" onclick="moreClaps()") Press On Me 
+  p
+  div(id="target") Claps for me
+
+  script. 
+    var clap_count = 0;
+    function moreClaps(){
+      clap_count += 2;
+      document.getElementById('target').innerHTML = `Clap ${clap_count} times`;
+    }
