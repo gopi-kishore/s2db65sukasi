@@ -1,6 +1,6 @@
 # s2wb65sukasi
 
-## Assignment 10
+## Assignment 12
 ### HEROKU SERVER
 [HEROKU LINK](https://dashboard.heroku.com/apps/s2db65sukasi)
 
