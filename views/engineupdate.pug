@@ -1,0 +1,46 @@
+extends layout 
+ 
+block content
+    h1= title
+    if(toShow == null)
+        h2 No instance to update
+    else
+        - let engineid = toShow._id 
+        - let turboengine_name = toShow.turboengine_name 
+        - let size = toShow.size 
+        - let turboengine_cost = toShow.turboengine_cost
+
+        div.row(class='mb-2') 
+            div.mr-1 ID is 
+            div #{engineid}  
+        - let actionid = "/resource/engine/" + engineid 
+        form(id='EngineForm', action=actionid, method="PUT") 
+            div.form-group 
+                label.enginAttr(for='turboengine_name') Turbo_Engine_Name_is:  
+                input#turboengine_name(type='text', name='turboengine_name',value = turboengine_name)
+            div.form-group 
+                label.enginAttr(for='size') Size_is: 
+                input#size(type='text', name='size',value = toShow.size ) 
+            div.form-group 
+                label.enginAttr(for='turboengine_cost') Turbo_Engine_Cost_is: 
+                input#turboengine_cost(type='number', name='turboengine_cost',value = turboengine_cost) 
+                span.validity
+            input(type="submit") 
+        
+        script. 
+            document.forms['EngineForm'].addEventListener('submit', (event) => { 
+            event.preventDefault(); 
+            // TODO do something here to show user that form is being submitted 
+            fetch(event.target.action, { 
+                method: 'PUT', 
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+            }).then((resp) => { 
+                return resp.json(); // or resp.text() or whatever the server sends 
+            }).then((body) => { 
+                alert("Update succeded") 
+                // TODO handle body 
+            }).catch((error) => { 
+                // TODO handle error 
+                alert("Save failed " + error ) 
+            }); 
+            });

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+ h1= title
+
+  if(toShow == null)
+    h2 No instance to detail
+  else
+    - let engineid = toShow._id 
+    - let turboengine_name = toShow.turboengine_name 
+    - let size = toShow.size 
+    - let turboengine_cost = toShow.turboengine_cost
+    div 
+    div.row 
+      div(class='enginAttr mr-3') Engin_ID_is: 
+      div #{engineid} 
+    div.row 
+      div(class='enginAttr mr-3') Turbo_Engine_Name_is: 
+      div #{turboengine_name} 
+    div.row 
+      div(class='enginAttr mr-3') Size_is: 
+      div #{size} 
+    div.row 
+      div(class='enginAttr mr-3') Turbo_Engine_Cost_is: 
+      div #{turboengine_cost}

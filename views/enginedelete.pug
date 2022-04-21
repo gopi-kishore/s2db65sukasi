@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let engineid = toShow._id 
+    - let turboengine_name = toShow.turboengine_name 
+    - let size = toShow.size 
+    - let turboengine_cost = toShow.turboengine_cost
+    - let actionid = "/resource/engine/" + engineid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='enginAttr mr-3') Engine_ID is: 
+        div #{engineid} 
+      div.row 
+        div(class='enginAttr mr-3') Turbo_Engine_Name_is: 
+        div #{turboengine_name} 
+      div.row 
+        div(class='enginAttr mr-3') Size_is: 
+        div #{size} 
+      div.row 
+        div(class='enginAttr mr-3') Turbo_Engine_Cost_is: 
+        div #{turboengine_cost} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the costume collection 
+      window.location.href='/engine' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'   
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/engine' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    }

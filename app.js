@@ -3,13 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var Engine = require("./models/engine"); 
+var Engine = require("./models/engine");
 
-const connectionString = process.env.MONGO_CON 
-console.log(process);
-console.log(process.env);
-mongoose = require('mongoose'); 
-mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}); 
+const connectionString = process.env.MONGO_CON
+var mongoose = require('mongoose');
+mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var engine = require('./models/engine');
 var resourceRouter = require('./routes/resource')
@@ -19,29 +17,29 @@ var engineRouter = require('./routes/engine');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
 
-let reseed = true; 
-if (reseed) { recreateDB();} 
+let reseed = true;
+if (reseed) { recreateDB(); }
 
-async function recreateDB(){ 
+async function recreateDB() {
   // Delete everything 
-  await engine.deleteMany(); 
- 
-  let instance1 = new engine({turboengine_name: 'Hyundai', size: '40lbs', turboengine_cost: 100 }); 
-  instance1.save( function(err,doc) { 
-      if(err) return console.error(err); 
-      console.log("First object saved") 
-  }); 
-  let instance2 = new engine({turboengine_name: 'Sonata', size: '60lbs', turboengine_cost: 80 }); 
-  instance2.save( function(err,doc) { 
-      if(err) return console.error(err); 
-      console.log("Second object saved") 
-  }); 
-  let instance3 = new engine({turboengine_name: 'Elantra', size: '20lbs', turboengine_cost: 60 }); 
-  instance3.save( function(err,doc) { 
-      if(err) return console.error(err); 
-      console.log("Third object saved") 
-  }); 
-} 
+  await engine.deleteMany();
+
+  let instance1 = new engine({ turboengine_name: 'Hyundai', size: '40lbs', turboengine_cost: 100 });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First object saved")
+  });
+  let instance2 = new engine({ turboengine_name: 'Sonata', size: '60lbs', turboengine_cost: 80 });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Second object saved")
+  });
+  let instance3 = new engine({ turboengine_name: 'Elantra', size: '20lbs', turboengine_cost: 60 });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Third object saved")
+  });
+}
 
 var app = express();
 
@@ -62,12 +60,12 @@ app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
 app.use('/', resourceRouter);
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
