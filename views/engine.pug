@@ -1,14 +1,33 @@
 extends layout
 
 block content
-    h1= title
-    - let items = results;
-    - let o;
-    script.
-        function buy(x){
-        alert('purchased item ' + x)
-        } 
-        div(class='container-fluid')
-        div(class='row')
-        each o, index in items
-        div(class='col-sm-3' onclick='buy('+index+')') #{o}
+  h1= title
+  - let items = results; 
+  button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/engine/create\")` ) Create a new Item
+  table(class="table table-stripped table-bordered")
+        thead(style="background-color:brown;color:white") 
+            tr
+                td Engine ID
+                td Engine name 
+                td Engine Size 
+                td Engine Cost 
+                td Update
+                td Details
+                td Delete
+        tbody
+            each item in items
+                tr
+                    td #{item._id}
+                    td #{item.turboengine_name}
+                    td #{item.size}
+                    td #{item.turboengine_cost}
+                    td 
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/engine/update/?id=${item._id}\")` ) Update
+                    td 
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/engine/detail/?id=${item._id}\")` ) Details
+                    td 
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/engine/delete/?id=${item._id}\")` ) Delete 
+                script. 
+                  function dispatch(path){ 
+                    window.location.href=path 
+                  }

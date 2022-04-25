@@ -6,13 +6,13 @@ block content
   form(id='EngineForm', action="/resource/engine", method="POST") 
     div.form-group 
         label.canteenAttr(for='turboengine_name') Turbo_Engine_Name 
-        input#turboengine_name(type='text', name='turboengine_name') 
+        input#turboengine_name(type='text', name='turboengine_name',minlength="3",maxlength="10") 
     div.form-group 
         label.canteenAttr(for='size') Size 
         input#size(type='text', name='size') 
     div.form-group 
         label.canteenAttr(for='turboengine_cost') Turbo_Engine_Cost 
-        input#turboengine_cost(type='number', name='turboengine_cost')
+        input#turboengine_cost(type='number', name='turboengine_cost',min="0.1",max="1499.99")
         span.validity 
     input(type="submit") 
  

@@ -1,8 +1,15 @@
 var Engine = require('../models/engine');
 
 // List of all Engines 
-exports.engine_list = function (req, res) {
-    res.send('NOT IMPLEMENTED: Engine list');
+exports.engine_list = async function (req, res) {
+    try {
+        items = await Engine.find();
+        res.send(items);
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
 };
 
 // for a specific Costume. 
@@ -68,17 +75,16 @@ failed`);
     }
 };
 
-// List of all Engine 
-exports.engine_list = async function (req, res) {
-    try {
-        theEngine = await Engine.find();
-        res.send(theEngine);
-    }
-    catch (err) {
-        res.status(500);
-        res.send(`{"error": ${err}}`);
-    }
-};
+// exports.engine_view_all_Page = async function (req, res) {
+//     try {
+//         lapto1 = await Engine.find();
+//         res.render('engines', { title: 'Engines avialble', results: lapto1 });
+//     }
+//     catch (err) {
+//         res.status(500);
+//         res.send(`{"error": ${err}}`);
+//     }
+// };
 
 // VIEWS 
 // Handle a show all view 

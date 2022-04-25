@@ -23,7 +23,7 @@ block content
                 input#size(type='text', name='size',value = toShow.size ) 
             div.form-group 
                 label.enginAttr(for='turboengine_cost') Turbo_Engine_Cost_is: 
-                input#turboengine_cost(type='number', name='turboengine_cost',value = turboengine_cost) 
+                input#turboengine_cost(type='number', name='turboengine_cost',value = turboengine_cost,min="0.1",max="1499.99") 
                 span.validity
             input(type="submit") 
         
